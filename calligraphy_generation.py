@@ -14,7 +14,7 @@ def generate_calligraphy(sentence, font, width, height, char_num, word_space_mod
         return
 
     # find character code with xml database
-    tree = ET.parse('data\\radicals.xml')
+    tree = ET.parse('../../Data/Characters/radicals.xml')
     root = tree.getroot()
     code_list = []
     for ch in sentence:
@@ -26,7 +26,7 @@ def generate_calligraphy(sentence, font, width, height, char_num, word_space_mod
                 break
         code_list.append(code)
 
-    images_path = 'images\\'
+    images_path = '../../Data/Calligraphy_database'
     images_names = []
     for f in os.listdir(images_path):
         if '.png' in f or '.jpg' in f or '.jpeg' in f:
@@ -134,14 +134,6 @@ def generate_calligraphy(sentence, font, width, height, char_num, word_space_mod
         print('bk rect:', bk[insert_pos_y: insert_pos_y+new_size, insert_pos_x: insert_pos_x+new_size].shape)
         bk[insert_pos_y: insert_pos_y+new_size, insert_pos_x: insert_pos_x+new_size] = images_squares_resized[i-1]
 
-
-
-
-
-
-
-
-
     # show iamges
     # for i in range(len(images_squares)):
     #     img = images_squares[i]
@@ -154,16 +146,6 @@ def generate_calligraphy(sentence, font, width, height, char_num, word_space_mod
     cv2.imshow('bk', bk)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
-
-
-
-
-
-
-
-
-
 
 
 parser = argparse.ArgumentParser(description='Generate calligraophy with type into a Chinese characters string')
