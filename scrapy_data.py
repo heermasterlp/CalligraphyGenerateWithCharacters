@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from bs4 import BeautifulSoup
 import time
+import json
 
 
 class OnLineDictScrapy(object):
@@ -95,6 +96,8 @@ def run():
 
     app = OnLineDictScrapy()
 
+    result = []
+
     for id in range(1, max_page+1):
         url = (base_url % id)
         print(url)
@@ -102,13 +105,13 @@ def run():
         page_source = app.get_page_source(url)
 
         dict = app.parse_html(page_source)
+        result.append(dict)
         print(dict)
 
-        if id == 1:
-            break
+        time.sleep(1.5)
 
-
-        time.sleep(2)
+    with open("scrapy_result.json", "w", encoding="utf8") as outfile:
+        json.dump(result, outfile, ensure_ascii=False)
 
 
 
